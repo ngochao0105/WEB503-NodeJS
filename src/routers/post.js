@@ -7,7 +7,7 @@ postRouter.get("/", (req, res) => {
 });
 
 // endpoint: api/posts/greet
-postRouter.get("/greet", (req, res) => {
+postRouter.get("/detail/:id", (req, res) => {
   res.send("Post greet");
 });
 
