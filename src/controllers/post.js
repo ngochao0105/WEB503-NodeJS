@@ -1,16 +1,27 @@
 import Post from "../models/Post.js";
 
 // Lấy tất cả posts
-export async function getPosts(req, res) {
+export const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find();
+    const { search } = req.query;
+    let query = {};
 
-    if(posts.length === 0) return res.status(200).json({
-      message: "Hiện tại không có bài viết nào"
-    })
+    if (search) {
+      query.title = { $regex: search, $options: "i" }; // không phân biệt hoa thường
+    }
+
+    const posts = await Post.find(query);
+
+    if (!posts.length) {
+      return res.status(404).json({ message: "Không tìm thấy bài viết nào." });
+    }
+
     res.json(posts);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    res.status(500).json({
+      message: "Lỗi server khi lấy danh sách bài viết.",
+      error: error.message,
+    });
   }
 }
 
