@@ -1,10 +1,11 @@
 import express from "express";
 // import morgan from "morgan";
 
-import postRouter from "./routers/post";
+import postRouter from "./routers/post.js";
 // import productRouter from "./routers/prduct";
-import authorRouter from "./routers/author";
+// import authorRouter from "./routers/author.js";
 import mongoose from "mongoose";
+import authRouter from "./routers/auth.js";
 
 const app = express();
 
@@ -22,14 +23,15 @@ app.use(express.json());
  }
 })()
 
-// localhost":3000
+
 app.get("/", (req, res) => {
   res.send("Hello, chao cac ban: ");
 });
 
 app.use("/api/posts", postRouter);
 // app.use("api/products" , productRouter)
-app.use("/api/authors", authorRouter);
+// app.use("/api/authors", authorRouter);
+app.use("/api/auth", authRouter);
 
 app.listen(3000, () => {
   console.log(`Server is running on port http://localhost:3000`);

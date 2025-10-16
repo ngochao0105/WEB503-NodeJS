@@ -16,6 +16,7 @@ export const createProductSchema = Joi.object({
       "number.min": "Giá sản phẩm không được âm",
       "any.required": "Giá sản phẩm là bắt buộc",
     }),
+    
     category: Joi.string().required().messages({
         "string.base": "ID danh mục phải là chuỗi",
         "string.empty": "ID danh mục không được để trống",
